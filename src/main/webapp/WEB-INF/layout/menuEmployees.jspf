@@ -1,0 +1,29 @@
+<%-- any content can be specified here e.g.: --%>
+<%@page import="com.mycompany.tecnaraenterprise.domain.Login"%>
+<%@ page pageEncoding="UTF-8" %>
+
+<% Login login = (Login) request.getSession().getAttribute("login");%>
+<% if (login != null && login.isIsLogged() && login.getRole().equals("base")) {
+%>
+<h2>Hello, <%=login.getUsername()%>. |  <a href ="/tecnaraEnterprise/logout">Logout</a> </h2>
+<br></br>
+<h3><a href="http://localhost:8080/tecnaraEnterprise/locations/listLocations">Ubicaciones</a></h3>
+
+<%} else if (login != null && login.isIsLogged() && login.getRole().equals("administrador")) {%>
+
+<h2>Hello,<%=login.getUsername()%>. |  <a href ="/tecnaraEnterprise/logout">Logout</a> </h2>
+<br></br>
+<h3><a href="http://localhost:8080/tecnaraEnterprise/employees/addEmployee">añadir empleado</a>  |
+    <a href="http://localhost:8080/tecnaraEnterprise/locations/addLocation">añadir ubicacion</a>  |
+    <a href="http://localhost:8080/tecnaraEnterprise/locations/listLocations">Ubicaciones</a></h3>
+
+
+<%} else {%>
+
+
+<h2><a href="/tecnaraEnterprise/login">login</a></h2>
+<%=login.getUsername()%>
+<%=login.isIsLogged()%>
+<%=login.getRole()%>
+
+<%}%>
